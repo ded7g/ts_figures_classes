@@ -19,8 +19,16 @@ export class Triangle implements Figure {
   private c: number;
 
   constructor(color: Color, a: number, b: number, c: number) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('All triangle sides must be greater than 0');
+    if (a <= 0) {
+      throw new Error(`Triangle side 'a' must be > 0, received: ${a}`);
+    }
+
+    if (b <= 0) {
+      throw new Error(`Triangle side 'b' must be > 0, received: ${b}`);
+    }
+
+    if (c <= 0) {
+      throw new Error(`Triangle side 'c' must be > 0, received: ${c}`);
     }
 
     const maxSide = Math.max(a, b, c);
@@ -54,7 +62,7 @@ export class Circle implements Figure {
 
   constructor(color: Color, radius: number) {
     if (radius <= 0) {
-      throw new Error('All circles must be greater than 0');
+      throw new Error(`Circle radius must be > 0, received: ${radius}`);
     }
 
     this.radius = radius;
@@ -78,8 +86,12 @@ export class Rectangle implements Figure {
   height: number;
 
   constructor(color: Color, width: number, height: number) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('All ectangle sides must be greater than 0');
+    if (width <= 0) {
+      throw new Error(`Rectangle width must be > 0, received: ${width}`);
+    }
+
+    if (height <= 0) {
+      throw new Error(`Rectangle height must be > 0, received: ${height}`);
     }
 
     this.color = color;
