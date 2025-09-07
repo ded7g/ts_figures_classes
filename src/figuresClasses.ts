@@ -1,13 +1,16 @@
+export type Shape = 'triangle' | 'circle' | 'rectangle';
+export type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: string = 'triangle';
+  shape: Shape = 'triangle';
 
-  color: string;
+  color: Color;
 
   private a: number;
 
@@ -15,7 +18,7 @@ export class Triangle implements Figure {
 
   private c: number;
 
-  constructor(color: string, a: number, b: number, c: number) {
+  constructor(color: Color, a: number, b: number, c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('All triangle sides must be greater than 0');
     }
@@ -23,7 +26,9 @@ export class Triangle implements Figure {
     const maxSide = Math.max(a, b, c);
 
     if (maxSide >= a + b + c - maxSide) {
-      throw new Error('Invalid triangle: the longest side must be smaller');
+      throw new Error(
+        `Invalid triangle: sides a=${a}, b=${b}, c=${c} do not satisfy the triangle inequality`,
+      );
     }
 
     this.a = a;
@@ -41,13 +46,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  shape: Shape = 'circle';
 
-  color: string;
+  color: Color;
 
   radius: number;
 
-  constructor(color: string, radius: number) {
+  constructor(color: Color, radius: number) {
     if (radius <= 0) {
       throw new Error('All circles must be greater than 0');
     }
@@ -64,15 +69,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  shape: Shape = 'rectangle';
 
-  color: string;
+  color: Color;
 
   width: number;
 
   height: number;
 
-  constructor(color: string, width: number, height: number) {
+  constructor(color: Color, width: number, height: number) {
     if (width <= 0 || height <= 0) {
       throw new Error('All ectangle sides must be greater than 0');
     }
